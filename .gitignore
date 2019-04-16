@@ -1,0 +1,3 @@
+static/VOCdevkit/*
+91_precs_resnet34.pt
+res18_model.pt
