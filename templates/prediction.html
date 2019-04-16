@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction</title>
+
+    <link rel="stylesheet" type="text/css" href="static/css/prediction.css">
+</head>
+<body>
+    <a href="/">Back to Home</a>
+
+    <div>
+        <div class="prediction-labels">
+            <h2 class="img-label">Image uploaded:</h2>
+            <h2 class="pred-label">Predicted Class:</h2>
+        </div>
+
+        <div class="prediction-content">
+            <img class="pred-img" src="static/images/{{ uploaded_image }}">
+            <p class="pred-text">{{ prediction_class }}</p>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

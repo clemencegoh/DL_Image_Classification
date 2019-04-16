@@ -1,0 +1,44 @@
+.precomputed-content{
+    display: flex;
+}
+
+.section1{
+    flex: 1;
+}
+
+.section2{
+    flex: 1;
+}
+
+img{
+    max-width: 25vw;
+    max-height: 25vh;
+    margin: auto;
+}
+
+.single-score{
+    margin: auto;
+}
+
+.single-item{
+    display: flex;
+    margin: 0 5vw;
+	border: 1px solid black;
+}
+
+.featured-class-text{
+    margin: auto;
+}
+
+.collapsible-toggle{
+    display: flex;
+    background: lightslategray;
+    cursor: pointer;
+}
+
+.collapsible-container{
+    border: 2px solid black;
+    margin: 2vw;
+    max-height: 80vh;
+    overflow: scroll;
+}

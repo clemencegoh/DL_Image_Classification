@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Precomputed</title>
+
+    <link rel="stylesheet" type="text/css" href="static/css/precomputed.css">
+
+
+    <template>
+        <div id="collapsible-container"
+             class="collapsible-container">
+
+        </div>
+    </template>
+
+    <template>
+        <div id="collapsible-toggle"
+             class="collapsible-toggle"
+             onclick="">
+            <img id="featured-img"
+                 class="featured-img" src="">
+            <p id="featured-class-text"
+               class="featured-class-text">
+                Text name here
+            </p>
+        </div>
+    </template>
+
+    <template>
+        <div id="val-list"
+             class="val-list" style="display:none;">
+            <div class="single-item">
+                <img id="single-image"
+                     class="single-image" src="">
+                <p id="single-score"
+                   class="single-score">Score: </p>
+            </div>
+
+        </div>
+    </template>
+
+    <script>
+        // Parse items here
+        function getData(){
+            // should look like {'plane': [{'image': 'path', 'score': int }] }
+            let data = {{ val_data | safe }};
+
+
+            // parse data
+            for (x in data){
+                for (let i=0;i<data[x].length;i++){
+                    data[x].sort((a, b) => parseFloat(b['score']) - parseFloat(a['score']) );
+                }
+            }
+            return data;
+        }
+
+        function buildData(){
+            let data = getData();
+
+            // init areas
+            let section1 = document.getElementById("section1");
+            let section2 = document.getElementById("section2");
+            let temp = document.getElementsByTagName("template")[0];
+            let temp1 = document.getElementsByTagName("template")[1];
+            let temp2 = document.getElementsByTagName("template")[2];
+
+            section1.textContent = '';
+            section2.textContent = '';
+
+            // init template pointers
+            let overall = temp.content.getElementById("collapsible-container");
+            let toggle = temp1.content.getElementById("collapsible-toggle");
+            let featured_img = temp1.content.getElementById("featured-img");
+            let featured_text = temp1.content.getElementById("featured-class-text");
+
+            // list pointer
+            let val_list = temp2.content.getElementById("val-list");
+
+            // for the loop
+            let single_image = temp2.content.getElementById("single-image");
+            let single_score = temp2.content.getElementById("single-score");
+
+            var x;
+            let side = section1;
+
+            for (x in data){
+                // clear image first
+                overall.textContent = "";
+
+                // set preview image
+                featured_img.setAttribute('src', data[x][0]['image']);
+
+                // set preview text
+                featured_text.textContent = x;
+
+                // append first
+                let preview_node = temp1.content.cloneNode(true);
+                overall.appendChild(preview_node);
+
+                // set everything else
+                for (let i=0;i<data[x].length;i++){
+
+                    single_image.setAttribute('src', data[x][i]['image']);
+                    single_score.textContent = "Score: " + data[x][i]['score'];
+
+                    // append to end
+                    let content_node = temp2.content.cloneNode(true);
+                    overall.appendChild(content_node);
+                }
+
+                //append to section
+                side.appendChild(temp.content.cloneNode(true));
+
+                // switch sides
+                if (side===section1){
+                    side = section2;
+                }else{
+                    side = section1;
+                }
+            }
+
+            // set onclick event for all toggles
+            let toggles = document.getElementsByClassName("collapsible-container");
+
+            for (let j=0;j<toggles.length;j++){
+                toggles[j].addEventListener('click', function(){
+
+                    this.classList.toggle('active');
+                    let content = this.getElementsByClassName("val-list");
+
+                    for (let k=0;k<content.length;k++){
+                        if (content[k].style.display === 'block') {
+                          content[k].style.display = "none";
+                        } else {
+                          content[k].style.display = "block";
+                        }
+                    }
+
+                });
+            }
+
+        }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        //do work
+        buildData();
+    });
+
+
+    </script>
+
+</head>
+<body>
+    <a href="/">Return Home</a>
+    <div>
+        <h1 style="text-align:center;">Precomputed Val Images</h1>
+    </div>
+    <div class="precomputed-content">
+        <div id="section1" class="section1">
+
+        </div>
+        <div id="section2" class="section2">
+
+        </div>
+    </div>
+</body>
+</html>

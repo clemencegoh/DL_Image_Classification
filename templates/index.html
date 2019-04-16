@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deep Learning UI</title>
+
+    <link rel="stylesheet" type="text/css" href="static/css/index.css">
+
+</head>
+<body>
+    <h1>Deep Learning GUI</h1>
+
+    <div>
+        <h2>Upload image here to determine which class it belongs to!</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <span class="btn btn-default btn-file">
+                Browse Image <input type="file" name="image">
+            </span>
+
+            <input type="submit" value="Upload your image" class="btn btn-primary">
+        </form>
+    </div>
+
+    <div>
+        <h2>Click below to see all precomputed predictions, together with the images.</h2>
+        <a href="/precomputed">Precomputed predictions on val set</a>
+    </div>
+
+</body>
+</html>

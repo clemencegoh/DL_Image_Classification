@@ -1,0 +1,38 @@
+body{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+.pred-img{
+    flex: 1;
+    max-width: 50vw;
+    max-height: 50vh;
+}
+
+.prediction-labels{
+    display: flex;
+}
+
+.prediction-content{
+    display: flex;
+}
+
+.img-label{
+    flex: 1;
+}
+
+.pred-label{
+    flex: 1;
+}
+
+.pred-text{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    justify-content: center;
+}
+
+
